@@ -23,11 +23,11 @@ class TimeStamp {
             val currentTime = Instant.now()
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
             println("value: current result: ${result.toString()}")
-            ResponseEntity.ok(
-                    result
-            )
+            ResponseEntity.status(304)
+                    .body(result)
         } catch (e: Exception) {
-            ResponseEntity.ok(ReplyError())
+            ResponseEntity.status(304)
+                    .body(ReplyError())
         }
 
     }
@@ -43,11 +43,12 @@ class TimeStamp {
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
             println("value: $value result: ${result.toString()}")
 
-            return ResponseEntity.ok(
-                    result
+            return ResponseEntity.status(304)
+                    .body(result
             )
         } catch (e: Exception) {
-            ResponseEntity.ok(ReplyError())
+            ResponseEntity.status(304)
+                    .body(ReplyError())
         }
 
     }
