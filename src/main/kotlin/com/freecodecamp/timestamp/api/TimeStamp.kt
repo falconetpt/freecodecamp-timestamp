@@ -28,8 +28,10 @@ class TimeStamp {
 
     @GetMapping("/{value}")
     fun getTimeStampDate(@PathVariable("value") value: String): ResponseEntity<Reply> {
-        val date = LocalDate.parse(value)
-        val currentTime = date.atStartOfDay(ZoneId.of("UTC")).toInstant()
+        val currentTime = if (value.matches("[0-9]+".toRegex()))
+                            Instant.ofEpochMilli(value.toLong())
+                        else
+                            LocalDate.parse(value).atStartOfDay(ZoneId.of("UTC")).toInstant()
 
         return ResponseEntity.ok(
                 Reply(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
