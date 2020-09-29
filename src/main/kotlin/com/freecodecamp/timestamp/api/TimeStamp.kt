@@ -21,9 +21,10 @@ class TimeStamp {
     fun getTimeStampNow(): ResponseEntity<Any> {
         return try {
             val currentTime = Instant.now()
-
+            val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+            println(result)
             ResponseEntity.ok(
-                    ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+                    result
             )
         } catch (e: Exception) {
             ResponseEntity.ok(ReplyError())
@@ -39,8 +40,11 @@ class TimeStamp {
             else
                 LocalDate.parse(value).atStartOfDay(ZoneId.of("UTC")).toInstant()
 
+            val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+            println(result)
+
             return ResponseEntity.ok(
-                    ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+                    result
             )
         } catch (e: Exception) {
             ResponseEntity.ok(ReplyError())
