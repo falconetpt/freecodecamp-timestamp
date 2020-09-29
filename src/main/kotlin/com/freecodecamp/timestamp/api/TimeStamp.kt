@@ -17,7 +17,7 @@ class TimeStamp {
     var DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss")
             .withZone(ZoneId.of("UTC"))
 
-    @GetMapping("")
+    @GetMapping("/**")
     fun getTimeStampNow(): ResponseEntity<Any> {
         return try {
             val currentTime = Instant.now()
