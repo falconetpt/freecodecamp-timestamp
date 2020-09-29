@@ -18,23 +18,33 @@ class TimeStamp {
             .withZone(ZoneId.of("UTC"))
 
     @GetMapping("")
-    fun getTimeStampNow(): ResponseEntity<Reply> {
-        val currentTime = Instant.now()
+    fun getTimeStampNow(): ResponseEntity<Any> {
+        return try {
+            val currentTime = Instant.now()
 
-        return ResponseEntity.ok(
-                Reply(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
-        )
+            ResponseEntity.ok(
+                    ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+            )
+        } catch (e: Exception) {
+            ResponseEntity.ok(ReplyError())
+        }
+
     }
 
     @GetMapping("/{value}")
-    fun getTimeStampDate(@PathVariable("value") value: String): ResponseEntity<Reply> {
-        val currentTime = if (value.matches("[0-9]+".toRegex()))
-                            Instant.ofEpochMilli(value.toLong())
-                        else
-                            LocalDate.parse(value).atStartOfDay(ZoneId.of("UTC")).toInstant()
+    fun getTimeStampDate(@PathVariable("value") value: String): ResponseEntity<Any> {
+        return try {
+            val currentTime = if (value.matches("[0-9]+".toRegex()))
+                Instant.ofEpochMilli(value.toLong())
+            else
+                LocalDate.parse(value).atStartOfDay(ZoneId.of("UTC")).toInstant()
 
-        return ResponseEntity.ok(
-                Reply(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
-        )
+            return ResponseEntity.ok(
+                    ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
+            )
+        } catch (e: Exception) {
+            ResponseEntity.ok(ReplyError())
+        }
+
     }
 }
