@@ -1,5 +1,6 @@
 package com.freecodecamp.timestamp.api
 
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,11 +24,9 @@ class TimeStamp {
             val currentTime = Instant.now()
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
             println("value: current result: ${result.toString()}")
-            ResponseEntity.status(304)
-                    .body(result)
+            ResponseEntity(result, HttpStatus.NOT_MODIFIED)
         } catch (e: Exception) {
-            ResponseEntity.status(304)
-                    .body(ReplyError())
+            ResponseEntity(ReplyError(), HttpStatus.NOT_MODIFIED)
         }
 
     }
@@ -43,13 +42,9 @@ class TimeStamp {
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
             println("value: $value result: ${result.toString()}")
 
-            return ResponseEntity.status(304)
-                    .body(result
-            )
+            ResponseEntity(result, HttpStatus.NOT_MODIFIED)
         } catch (e: Exception) {
-            ResponseEntity.status(304)
-                    .body(ReplyError())
+            ResponseEntity(ReplyError(), HttpStatus.NOT_MODIFIED)
         }
-
     }
 }
