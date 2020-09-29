@@ -22,7 +22,7 @@ class TimeStamp {
         return try {
             val currentTime = Instant.now()
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
-            println("value: $value result: ${result.toString()}")
+            println("value: current result: ${result.toString()}")
             ResponseEntity.ok(
                     result
             )
