@@ -1,3 +1,3 @@
 package com.freecodecamp.timestamp.api
 
-class ReplySuccess (val unix: Long, val utc: String)
+data class ReplySuccess (val unix: Long, val utc: String)

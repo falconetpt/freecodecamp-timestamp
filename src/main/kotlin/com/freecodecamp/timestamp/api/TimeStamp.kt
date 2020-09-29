@@ -22,7 +22,7 @@ class TimeStamp {
         return try {
             val currentTime = Instant.now()
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
-            println(result)
+            println("value: $value result: ${result.toString()}")
             ResponseEntity.ok(
                     result
             )
@@ -41,7 +41,7 @@ class TimeStamp {
                 LocalDate.parse(value).atStartOfDay(ZoneId.of("UTC")).toInstant()
 
             val result = ReplySuccess(currentTime.toEpochMilli(), DATE_TIME_FORMATTER.format(currentTime) + " GMT")
-            println(result)
+            println("value: $value result: ${result.toString()}")
 
             return ResponseEntity.ok(
                     result
