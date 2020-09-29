@@ -1,3 +1,3 @@
 package com.freecodecamp.timestamp.api
 
-class ReplyError (error: String = "Invalid Date")
+class ReplyError (val error: String = "Invalid Date")
