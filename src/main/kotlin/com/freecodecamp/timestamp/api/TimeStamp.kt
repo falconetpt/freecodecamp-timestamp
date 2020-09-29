@@ -1,18 +1,14 @@
 package com.freecodecamp.timestamp.api
 
 import org.springframework.http.ResponseEntity
-import javafx.util.Duration.millis
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
-import java.util.Calendar
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.time.LocalDate
-
-
-
-
-
 
 
 @RestController
